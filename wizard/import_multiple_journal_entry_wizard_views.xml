@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="import_multiple_journal_entry_wizard_view_form" model="ir.ui.view">
+        <field name="name">sm.import.multiple.journal.entry.wizard.form</field>
+        <field name="model">sm.import.multiple.journal.entry.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Import Journal Entries">
+                <group>
+                    <field name="journal_id"/>
+                    <field name="import_file" filename="file_name"/>
+                    <field name="file_name" invisible="1"/>
+                    <field name="has_header"/>
+                    <field name="post_entries"/>
+                </group>
+                <div class="text-muted">
+                    Columns: Reference, Date, Account Code, Label, Partner, Debit, Credit. Rows sharing a Reference become one journal entry.
+                </div>
+                <footer>
+                    <button name="action_import" string="Import" type="object" class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_import_multiple_journal_entry_wizard" model="ir.actions.act_window">
+        <field name="name">Import Journal Entries</field>
+        <field name="res_model">sm.import.multiple.journal.entry.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+    <menuitem id="menu_sm_import_multiple_journal_entry"
+              name="Import Multiple Journal Entries"
+              parent="account.menu_finance_entries"
+              action="action_import_multiple_journal_entry_wizard"
+              sequence="90"/>
+</odoo>
